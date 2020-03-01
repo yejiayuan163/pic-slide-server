@@ -5,7 +5,7 @@ const Controller = require('egg').Controller;
 class SlideController extends Controller {
   async list() {
     const { ctx } = this;
-    const list = await ctx.service.slide.getList();
+    const list = await ctx.service.slide.getList(ctx);
     ctx.status = 200;
     ctx.body = list;
     // ctx.body = 'hi, details';
@@ -13,13 +13,20 @@ class SlideController extends Controller {
 
   async details() {
     const { ctx } = this;
-    const slideDetails = await ctx.service.slide.slideDetails();
+    const slideDetails = await ctx.service.slide.slideDetails(ctx);
     ctx.body = slideDetails;
+  }
+
+  async videosDetails() {
+    const { ctx } = this;
+    const videosDetails = await ctx.service.slide.videosDetails(ctx);
+    ctx.body = videosDetails;
   }
 
   async edit() {
     const { ctx } = this;
-    ctx.body = 'hi, edit';
+    const result = await ctx.service.slide.addSlideInfo(ctx);
+    ctx.body = result;
   }
 }
 
