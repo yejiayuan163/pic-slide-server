@@ -9,7 +9,7 @@ const collectPicToSlide = require('../util/sql').collectPicToSlide;
 class SlideService extends Service {
   async getList(ctx) {
     // const user = await this.ctx.db.query('select * from user where uid = ?', uid);
-    const result = await this.app.mysql.select('SLIDE_LIST', { limit: 10 });
+    const result = await this.app.mysql.select('SLIDE_LIST', { limit: 50 });
     // console.log('result:', result);
     let picList = result.map((item) => {
       return {
