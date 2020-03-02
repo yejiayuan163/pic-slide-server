@@ -4,6 +4,7 @@ const getSlideInfo = require('../util/sql').getSlideInfo;
 const getPicList = require('../util/sql').getPicList;
 const getVideoInfo = require('../util/sql').getVideoInfo;
 const addSlideInfo = require('../util/sql').addSlideInfo;
+const collectPicToSlide = require('../util/sql').collectPicToSlide;
 
 class SlideService extends Service {
   async getList(ctx) {
@@ -68,7 +69,10 @@ class SlideService extends Service {
       // 修改相册
     } else {
       // 新增相册
-      return await addSlideInfo(this, ctx);
+      const { updateSuccess, id } = await addSlideInfo(this, ctx);
+      if (updateSuccess) {
+        await collectPicToSlide(this, ctx, id);
+      }
     }
   }
 }

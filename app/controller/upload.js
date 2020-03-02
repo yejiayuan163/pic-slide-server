@@ -10,9 +10,9 @@ class UploadController extends Controller {
     const { ctx } = this;
     const fileName = await addPicToStatic(this, ctx);
     console.log('fileName:', fileName)
-    addPictureInfo(this, fileName)
+    const pictureId = await addPictureInfo(this, fileName)
     ctx.set('Content-Type', 'multipart/*');
-    ctx.body = { code: '000000', info: { fileName } };
+    ctx.body = { code: '000000', info: { fileName, pictureId } };
     ctx.status = 200;
   }
 
