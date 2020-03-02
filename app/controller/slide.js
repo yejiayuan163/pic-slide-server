@@ -26,7 +26,13 @@ class SlideController extends Controller {
   async edit() {
     const { ctx } = this;
     const result = await ctx.service.slide.addSlideInfo(ctx);
-    ctx.body = result;
+    console.log('resut:', result);
+    if (result) {
+      ctx.body = { code: '000000', msg: '保存成功' };
+    } else {
+      ctx.body = { code: '111111', msg: '出问题了' };
+    }
+    ctx.status = 200;
   }
 }
 

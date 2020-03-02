@@ -73,6 +73,7 @@ class SlideService extends Service {
       if (updateSuccess) {
         await collectPicToSlide(this, ctx, id);
       }
+      return updateSuccess;
     }
   }
 }
